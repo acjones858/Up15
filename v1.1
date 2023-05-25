@@ -3,9 +3,6 @@
 # Define the number of days between update checks
 check_interval_days=15
 
-# Define the sudo password
-sudo_password="YOUR_SUDO_PASSWORD"
-
 # Color codes
 light_cyan='\033[1;36m'
 light_magenta='\033[1;35m'
@@ -17,14 +14,14 @@ while true; do
   echo -e "${light_cyan}Checking for updates...${reset_color}"
 
   # Update package lists
-  echo $sudo_password | sudo -S apt update
+  sudo -S apt update
 
   # Check if updates are available
   if [[ $(apt list --upgradable 2>/dev/null | grep -c upgradable) -gt 0 ]]; then
     echo -e "${light_magenta}Updates available. Updating and upgrading...${reset_color}"
 
     # Upgrade packages
-    echo $sudo_password | sudo -S apt upgrade -y
+    sudo -S apt upgrade -y
 
     echo -e "${light_green}Updates installed successfully!${reset_color}"
   else
